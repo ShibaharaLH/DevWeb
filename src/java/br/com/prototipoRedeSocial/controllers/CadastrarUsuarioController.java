@@ -10,6 +10,7 @@ import br.com.prototipoRedeSocial.DTO.UsuarioDTO;
 import br.com.prototipoRedeSocial.connector.ConnectorDataBase;
 import br.com.prototipoRedeSocial.models.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,42 +26,35 @@ import javax.servlet.http.HttpSession;
  *
  * @author kono
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/Login"})
-public class LoginController extends HttpServlet {
-
+@WebServlet(name = "CadastrarUsuarioController", urlPatterns = {"/Cadastrar"})
+public class CadastrarUsuarioController extends HttpServlet {
+ 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void processRequest(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException, SQLException {
-        validaDadosRecebidos(request);
+    
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        cadastrarUsuario(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Home.jsp");
         requestDispatcher.forward(request, response);
-
     }
-
-    private void validaDadosRecebidos(HttpServletRequest request) throws ServletException, SQLException {
+     
+     private void cadastrarUsuario(HttpServletRequest request) throws ServletException, SQLException {
         String nomeUsuario = request.getParameter("txtUsuario");
         String senha = request.getParameter("txtSenha");
         UsuarioDTO usuarioRequest = new UsuarioDTO(nomeUsuario, senha);
         UsuarioDAO usuarioDAO = new UsuarioDAO(ConnectorDataBase.getConexao());
-        Usuario usuarioResponse = usuarioDAO.login(usuarioRequest);
-        if (!usuarioResponse.getEmail().equals("")) {
-            if (usuarioResponse.getAtivo() == false) {
-                throw new ServletException("Usuario desativado");
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuarioautenticado", nomeUsuario);
-            }
-        } else {
-            throw new ServletException("Login ou Senha Inválida");
+        if(usuarioDAO.verificaUsuarioCadastrado(usuarioRequest) == false){
+            usuarioDAO.cadastrarUsuario(usuarioRequest);
+        }else{
+            throw new ServletException("Usuário já cadastrado");
         }
     }
 }

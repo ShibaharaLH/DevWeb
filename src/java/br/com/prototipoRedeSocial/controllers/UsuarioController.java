@@ -65,6 +65,10 @@ public class UsuarioController extends HttpServlet {
             cadastrarUsuario(request, usuarioDAO);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request, response);
+        }else if(request.getParameter("txtPasswordActive") != null){
+            ativaUsuario(request, usuarioDAO);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 
@@ -101,7 +105,7 @@ public class UsuarioController extends HttpServlet {
         // outgoing message information
         HttpSession session = request.getSession();
         session.setAttribute("emailActiveUser", email);
-        String message = "Para ativar seu usuário entre no seguinte link: http://localhost:8080/PrototipoRedeSocial/newPassword.jsp";
+        String message = "Para ativar seu usuário entre no seguinte link: http://localhost:8080/PrototipoRedeSocial/ActiveUser.jsp";
         String subject = "Email para ativar usuário";
         PlainTextEmailSender mailer = new PlainTextEmailSender();
 

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<html>
+    <head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="style.css" type="text/css"/>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+        <script type="text/javascript">
+            jQuery(window).load(function($){
+                    atualizaRelogio();
+            });
+        </script>
+
+        <title> Twitter Simulator </title>
+    </head>
+    <body>
+        
+        <div>
+            <output id="data" style="font-family: 'arial black', 'avant garde'; font-size: 15px;"></output>
+        </div>
+        <div>
+            <output id="hora" style="font-family: 'arial black', 'avant garde'; font-size: 15px;"></output>				
+        </div>	
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <h2 class="page-header">Comments</h2>
+                <section class="comment-list">
+                  <!-- First Comment -->
+                  <article class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara</figcaption>
+                      </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                      <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                          <header class="text-left">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara </div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual </time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              Postagem Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <!-- Second Comment Reply -->
+                  <article class="row">
+                    <div class="col-md-2 col-sm-2 col-md-offset-1 col-sm-offset-0 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara2</figcaption>
+                      </figure>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                      <div class="panel panel-default arrow left">
+                        <div class="panel-heading right">Reply</div>
+                        <div class="panel-body">
+                          <header class="text-left">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara</div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual2</time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              Comentario Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <!-- Third Comment -->
+                  <article class="row">
+                    <div class="col-md-10 col-sm-10">
+                      <div class="panel panel-default arrow right">
+                        <div class="panel-body">
+                          <header class="text-right">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara3</div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual3 </time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                             Nova Postagem Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara3</figcaption>
+                      </figure>
+                    </div>
+                  </article>
+                  <!-- Fourth Comment -->
+                  <article class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara4</figcaption>
+                      </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                      <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                          <header class="text-left">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara4</div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual4 </time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              Nova Postagem Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <!-- Fifth Comment -->
+                  <article class="row">
+                    <div class="col-md-10 col-sm-10">
+                      <div class="panel panel-default arrow right">
+                        <div class="panel-body">
+                          <header class="text-right">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara5</div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual5 </time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              Nova Postagem Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara5</figcaption>
+                      </figure>
+                    </div>
+                  </article>
+                  <!-- Sixth Comment Reply -->
+                  <article class="row">
+                    <div class="col-md-9 col-sm-9 col-md-offset-1 col-md-pull-1 col-sm-offset-0">
+                      <div class="panel panel-default arrow right">
+                        <div class="panel-heading">Reply</div>
+                        <div class="panel-body">
+                          <header class="text-right">
+                            <div class="comment-user"><i class="fa fa-user"></i> Usuario: Shibahara5</div>
+                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Hora Atual6</time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              Comentario Aqui!
+                            </p>
+                          </div>
+                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-md-pull-1 hidden-xs">
+                      <figure class="thumbnail">
+                        <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
+                        <figcaption class="text-center">Shibahara6</figcaption>
+                      </figure>
+                    </div>
+                  </article>
+                </section>
+            </div>
+          </div>
+        </div>
+    </body>
+    
+    <script>
+            function atualizaRelogio(){
+                var momentoAtual = new Date();
+			
+                var vhora = momentoAtual.getHours();
+                var vminuto = momentoAtual.getMinutes();
+                var vsegundo = momentoAtual.getSeconds();
+
+                var vdia = momentoAtual.getDate();
+                var vmes = momentoAtual.getMonth() + 1;
+                var vano = momentoAtual.getFullYear();
+
+                if (vdia < 10){ vdia = "0" + vdia;}
+                if (vmes < 10){ vmes = "0" + vmes;}
+                if (vhora < 10){ vhora = "0" + vhora;}
+                if (vminuto < 10){ vminuto = "0" + vminuto;}
+                if (vsegundo < 10){ vsegundo = "0" + vsegundo;}
+
+                dataFormat = vdia + " / " + vmes + " / " + vano;
+                horaFormat = vhora + " : " + vminuto + " : " + vsegundo;
+
+                document.getElementById("data").innerHTML = dataFormat;
+                document.getElementById("hora").innerHTML = horaFormat;
+
+                setTimeout("atualizaRelogio()",1000);
+            }
+	</script>
+    
+</html>

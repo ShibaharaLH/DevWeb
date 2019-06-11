@@ -11,14 +11,24 @@ package br.com.prototipoRedeSocial.models;
  */
 public class Usuario {
 
+    private String userName;
     private String email;
     private String senha;
     private Boolean ativo; 
 
-    public Usuario(String email, String senha, Boolean ativo) {
+    public Usuario(String userName, String email, String senha, Boolean ativo) {
+        this.userName = userName;
         this.email = email;
         this.senha = senha;
         this.ativo = ativo;
+    }
+    
+    public String getUserName(){
+        return userName;
+    }
+    
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     public String getEmail() {

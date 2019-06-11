@@ -25,7 +25,7 @@ public class UsuarioDAO {
     }
 
     public Usuario login(UsuarioDTO usuarioRequest) throws SQLException {
-        Usuario usuarioResponse = new Usuario("", "", false);
+        Usuario usuarioResponse = new Usuario("", "", "", false);
         String sql = "select * from Usuario where email = ? and senha = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -35,6 +35,7 @@ public class UsuarioDAO {
 
             ResultSet result = stmt.executeQuery();
             if (result.next() == true) {
+                usuarioResponse.setUserName(result.getString("userName"));
                 usuarioResponse.setEmail(result.getString("email"));
                 usuarioResponse.setSenha(result.getString("senha"));
                 if (result.getInt("ativo") == 1) {
@@ -51,7 +52,31 @@ public class UsuarioDAO {
         return usuarioResponse;
     }
     
-    public boolean verificaUsuarioCadastrado(UsuarioDTO usuarioRequest) throws SQLException{
+    public boolean verificaUsuarioAtivo(UsuarioDTO usuarioRequest) throws SQLException{
+        boolean toReturn = false;
+        String sql = "select * from Usuario where email = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setString(1, usuarioRequest.getEmail());
+
+            ResultSet result = stmt.executeQuery();
+            if (result.next() == true) {
+                if (result.getInt("ativo") == 1) {
+                    toReturn = true;
+                }
+            }
+            result.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+        return toReturn;
+    }
+    
+    public boolean verificaEmailCadastrado(UsuarioDTO usuarioRequest) throws SQLException{
         boolean toReturn = false;
         String sql = "select * from Usuario where email = ?";
         try {
@@ -70,15 +95,135 @@ public class UsuarioDAO {
         }
         return toReturn;
     }
-
-    public void cadastrarUsuario(UsuarioDTO usuarioRequest) throws SQLException {
-        Usuario usuario = new Usuario(usuarioRequest.getEmail(), usuarioRequest.getSenha(), true);
-        String sql = "insert into Usuario(email, senha, ativo) values(?, ?, 1)";
+    
+    public boolean verificaUserNameCadastrado(UsuarioDTO usuarioRequest) throws SQLException{
+        boolean toReturn = false;
+        String sql = "select * from Usuario where userName = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setString(1, usuario.getEmail());
-            stmt.setString(2, usuario.getSenha());
+            stmt.setString(1, usuarioRequest.getUserName());
+
+            ResultSet result = stmt.executeQuery();
+            if (result.next() == true) {
+                toReturn = true;
+            }
+            result.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+    }
+
+    public void cadastrarUsuario(UsuarioDTO usuarioRequest) throws SQLException {
+        Usuario usuario = new Usuario(usuarioRequest.getUserName(), usuarioRequest.getEmail(), usuarioRequest.getSenha(), false);
+        String sql = "insert into Usuario(userName, email, senha, ativo) values(?, ?, ?, 0)";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setString(1, usuario.getUserName());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void excluiUsuario(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "delete from Usuario where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void ativarUsuario(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Usuario set ativo = 1 where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void desativarUsuario(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Usuario set ativo = 0 where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void alterarPassword(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Usuario set senha = ? where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getSenha());
+            stmt.setString(2, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void alterarUserName(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Usuario set userName = ? where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getUserName());
+            stmt.setString(2, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+    
+    public void alterarEmail(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Usuario set email = ? where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getNewEmail());
+            stmt.setString(2, usuarioRequest.getEmail());
 
             stmt.execute();
             stmt.close();

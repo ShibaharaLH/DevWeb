@@ -11,12 +11,24 @@ package br.com.prototipoRedeSocial.DTO;
  */
 public class UsuarioDTO {
     
+    private String userName;
     private String email;
+    private String newEmail;
     private String senha;
 
-    public UsuarioDTO(String email, String senha) {
+    public UsuarioDTO(String userName, String email, String newEmail, String senha) {
+        this.userName = userName;
         this.email = email;
+        this.newEmail = newEmail;
         this.senha = senha;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -27,6 +39,14 @@ public class UsuarioDTO {
         this.email = email;
     }
 
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    public void setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -34,4 +54,5 @@ public class UsuarioDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 }

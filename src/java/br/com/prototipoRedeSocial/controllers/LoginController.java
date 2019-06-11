@@ -47,17 +47,18 @@ public class LoginController extends HttpServlet {
     }
 
     private void validaDadosRecebidos(HttpServletRequest request) throws ServletException, SQLException {
-        String nomeUsuario = request.getParameter("txtUsuario");
+        String email = request.getParameter("txtEmail");
         String senha = request.getParameter("txtSenha");
-        UsuarioDTO usuarioRequest = new UsuarioDTO(nomeUsuario, senha);
+        UsuarioDTO usuarioLoginRequest = new UsuarioDTO("", email, null, senha);
         UsuarioDAO usuarioDAO = new UsuarioDAO(ConnectorDataBase.getConexao());
-        Usuario usuarioResponse = usuarioDAO.login(usuarioRequest);
+        Usuario usuarioResponse = usuarioDAO.login(usuarioLoginRequest);
         if (!usuarioResponse.getEmail().equals("")) {
             if (usuarioResponse.getAtivo() == false) {
                 throw new ServletException("Usuario desativado");
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("usuarioautenticado", nomeUsuario);
+                session.setAttribute("emailUsuarioAutenticado", usuarioResponse.getEmail());
+                session.setAttribute("userNameUsuarioAutenticado", usuarioResponse.getUserName());
             }
         } else {
             throw new ServletException("Login ou Senha Inválida");

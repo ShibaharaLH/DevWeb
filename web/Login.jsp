@@ -11,7 +11,7 @@
     <head>
         <script type="text/javascript">
             function validarLogin() {
-                if (document.formLogin.txtUsuario.value == "") {
+                if (document.formLogin.txtEmail.value == "") {
                     alert("Campo Usuário Não Informado");
                     return false;
                 }
@@ -30,11 +30,11 @@
         <form name="formLogin" action="Login" method="post">
             <p align="center">
             <table>
-                <tr><td>Usuário:</td><td><input type="text" name="txtUsuario"/></td></tr>
+                <tr><td>Usuário:</td><td><input type="text" name="txtEmail"/></td></tr>
                 <tr><td>Senha:</td><td><input type="password" name="txtSenha"/></td></tr>
                 <tr><td colspan="2" align="center"><input type="button" value="Entrar" onclick="validarLogin()"/></td></tr>
             </table>
-        </p>
-    </form>
+            </p>
+        </form>
 </body>
 </html>

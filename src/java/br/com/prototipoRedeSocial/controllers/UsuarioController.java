@@ -126,8 +126,10 @@ public class UsuarioController extends HttpServlet {
         UsuarioDTO usuarioRequest = new UsuarioDTO(newUserName, email, newEmail, newPassword);
         if (newUserName != null) {
             usuarioDAO.alterarUserName(usuarioRequest);
+            session.setAttribute("userNameUsuarioAutenticado", newUserName);
         } else if (newEmail != null) {
             usuarioDAO.alterarEmail(usuarioRequest);
+            session.setAttribute("emailUsuarioAutenticado", newEmail);
         } else if (newPassword != null) {
             usuarioDAO.alterarPassword(usuarioRequest);
         }

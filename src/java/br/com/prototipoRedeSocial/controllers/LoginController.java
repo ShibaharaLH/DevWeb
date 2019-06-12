@@ -41,9 +41,8 @@ public class LoginController extends HttpServlet {
     private void processRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException, SQLException {
         validaDadosRecebidos(request);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Home.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Post");
         requestDispatcher.forward(request, response);
-
     }
 
     private void validaDadosRecebidos(HttpServletRequest request) throws ServletException, SQLException {

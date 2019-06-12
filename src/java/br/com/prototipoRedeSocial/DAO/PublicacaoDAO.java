@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class PublicacaoDAO {
     }
     
     public List<Post> getPosts() throws SQLException{
-        List<Post> toReturn = null;
+        List<Post> toReturn = new ArrayList<Post>();
         String sql = "select * from Post";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -61,8 +62,6 @@ public class PublicacaoDAO {
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
-        } finally {
-            connection.close();
         }
     }
     
@@ -202,7 +201,7 @@ public class PublicacaoDAO {
     }
     
     public PostDTO postDetails(Post post) throws SQLException{
-        List<PostCommentDTO> listPostComment = null;
+        List<PostCommentDTO> listPostComment = new ArrayList<PostCommentDTO>();
         String sql = "select * from PostComment where idPost = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);

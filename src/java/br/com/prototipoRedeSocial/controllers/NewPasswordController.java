@@ -41,9 +41,7 @@ public class NewPasswordController extends HttpServlet {
             throws ServletException, IOException {
         try {
             proccessPostRequest(request, response);
-        } catch (MessagingException ex) {
-            Logger.getLogger(NewPasswordController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (MessagingException | SQLException ex) {
             Logger.getLogger(NewPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

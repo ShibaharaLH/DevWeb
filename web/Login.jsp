@@ -29,11 +29,11 @@
         <!--    <form name="formLogin" action="Login" method="post"> -->
         <form name="formLogin" action="Login" method="post">
             <p align="center">
-            <table>
-                <tr><td>Usuário:</td><td><input type="text" name="txtEmail"/></td></tr>
-                <tr><td>Senha:</td><td><input type="password" name="txtSenha"/></td></tr>
-                <tr><td colspan="2" align="center"><input type="button" value="Entrar" onclick="validarLogin()"/></td></tr>
-            </table>
+                <table>
+                    <tr><td>Usuário:</td><td><input type="text" name="txtEmail"/></td></tr>
+                    <tr><td>Senha:</td><td><input type="password" name="txtSenha"/></td></tr>
+                    <tr><td colspan="2" align="center"><input type="button" value="Entrar" onclick="validarLogin()"/></td></tr>
+                </table>
             </p>
         </form>
 </body>

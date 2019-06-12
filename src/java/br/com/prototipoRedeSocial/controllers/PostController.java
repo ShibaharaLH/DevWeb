@@ -8,8 +8,8 @@ package br.com.prototipoRedeSocial.controllers;
 import br.com.prototipoRedeSocial.DAO.PublicacaoDAO;
 import br.com.prototipoRedeSocial.connector.ConnectorDataBase;
 import br.com.prototipoRedeSocial.models.Post;
+import br.com.prototipoRedeSocial.models.PostComment;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -68,8 +68,11 @@ public class PostController extends HttpServlet {
 
     protected void processGetRequest(HttpServletRequest request, HttpServletResponse response, PublicacaoDAO publicacaoDAO)
             throws ServletException, IOException, SQLException {
-        System.out.println("postId " + request.getParameter("hiddenPostID"));
-        System.out.println("email " + request.getParameter("hiddenPostEmail"));
-        System.out.println("value " + request.getParameter("hiddenPostValue"));
+        List<PostComment> postDetails = publicacaoDAO.getPostComment(new Post(Integer.parseInt(request.getParameter("hiddenPostID")), 
+                request.getParameter("hiddenPostValue"), request.getParameter("hiddenPostEmail")));
+        HttpSession session = request.getSession();
+        session.setAttribute("postDetails", postDetails);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("PostDetails.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

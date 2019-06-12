@@ -5,12 +5,8 @@
  */
 package br.com.prototipoRedeSocial.DAO;
 
-import br.com.prototipoRedeSocial.DTO.PostCommentDTO;
-import br.com.prototipoRedeSocial.DTO.PostDTO;
-import br.com.prototipoRedeSocial.DTO.SubCommentPostDTO;
 import br.com.prototipoRedeSocial.models.Post;
 import br.com.prototipoRedeSocial.models.PostComment;
-import br.com.prototipoRedeSocial.models.SubCommentPost;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,6 +35,29 @@ public class PublicacaoDAO {
             ResultSet result = stmt.executeQuery();
             while (result.next() == true) {
                 toReturn.add(new Post(result.getInt("idPost"), result.getString("postValue"), result.getString("email")));
+            }
+            
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+        return toReturn;
+    }
+    
+    public List<PostComment> getPostComment(Post post) throws SQLException{
+        List<PostComment> toReturn = new ArrayList<PostComment>();
+        String sql = "select * from PostComment where idPost = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, post.getIdPost());
+            
+            ResultSet result = stmt.executeQuery();
+            while (result.next() == true) {
+                toReturn.add(new PostComment(result.getInt("idPostComment"), result.getInt("idPost"), 
+                        result.getString("postCommentValue"), result.getString("email")));
             }
             
             stmt.execute();
@@ -146,104 +165,6 @@ public class PublicacaoDAO {
         } finally {
             connection.close();
         }
-    }
-    
-    public void inserirSubCommentPost(SubCommentPost subComment) throws SQLException{
-        String sql = "insert into SubCommentPost (idPostComment, idPost, subCommentPostValue, email) values (?, ?, ?, ?);";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            
-            stmt.setInt(1, subComment.getIdCommentPost());
-            stmt.setInt(2, subComment.getIdPost());
-            stmt.setString(3, subComment.getSubCommentValue());
-            stmt.setString(4, subComment.getEmail());
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-    }
-    
-     public void atualizarSubCommentPost(SubCommentPost subComment) throws SQLException{
-        String sql = "update SubCommentPost set subCommentPostValue = ? where idSubCommentPost = ?;";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            
-            stmt.setString(1, subComment.getSubCommentValue());
-            stmt.setInt(2, subComment.getIdCommentPost());
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-    }
-    
-    public void excluirSubCommentPost(SubCommentPost subComment) throws SQLException{
-        String sql = "delete from SubCommentPost where idSubCommentPost = ?;";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            
-            stmt.setInt(1, subComment.getIdSubCommentPost());
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-    }
-    
-    public PostDTO postDetails(Post post) throws SQLException{
-        List<PostCommentDTO> listPostComment = new ArrayList<PostCommentDTO>();
-        String sql = "select * from PostComment where idPost = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, post.getIdPost());
-
-            ResultSet result = stmt.executeQuery();
-            while (result.next() == true) {
-                listPostComment.add(new PostCommentDTO(result.getInt("idPostComment"), result.getString("postCommentValue"),
-                result.getString("email"), getListSubCommentPost(result.getInt("idPostComment"))));
-            }
-            result.close();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-        PostDTO postDetails = new PostDTO(post.getIdPost(), post.getPostValue(), post.getEmail(), listPostComment);
-        return postDetails;
-    }
-    
-    private List<SubCommentPostDTO> getListSubCommentPost(int idCommentPost) throws SQLException{
-        List<SubCommentPostDTO> toReturn = null;
-        String sql = "select * from SubCommentPost where idPostComment = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, idCommentPost);
-
-            ResultSet result = stmt.executeQuery();
-            while (result.next() == true) {
-                toReturn.add(new SubCommentPostDTO(result.getString("subCommentPostValue"), result.getString("email")));
-            }
-            result.close();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-        return toReturn;
     }
     
 }

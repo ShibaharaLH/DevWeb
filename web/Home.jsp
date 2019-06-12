@@ -36,7 +36,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Email</th>
-                        <th scope="col">Post</th>
+                        <th scope="col">Comentário</th>
                         <th scope="col"> </th>
                     </tr>
                 </thead>
@@ -47,9 +47,9 @@
                             <td>${p.postValue}</td>
                             <td>
                                 <form name="formDetalhesPost" action="Post" method="get">
-                                    <input type="hidden" name="hiddenPostID" value=${p.idPost}/>
-                                    <input type="hidden" name="hiddenPostEmail" value=${p.email}/>
-                                    <input type="hidden" name="hiddenPostValue" value=${p.postValue}/>
+                                    <input type="hidden" name="hiddenPostID" value="${p.idPost}">
+                                    <input type="hidden" name="hiddenPostEmail" value="${p.email}">
+                                    <input type="hidden" name="hiddenPostValue" value="${p.postValue}">
                                     <input type="submit" value="Ver detalhes"/>
                                 </form>
                             </td>

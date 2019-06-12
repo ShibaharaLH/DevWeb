@@ -50,7 +50,7 @@ public class UsuarioController extends HttpServlet {
         if (request.getParameter("txtChangeUserName") != null || request.getParameter("txtChangePassword") != null
                 || request.getParameter("txtChangeEmail") != null) {
             alteraUsuario(request, usuarioDAO);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("configUser.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("ConfigUser.jsp");
             requestDispatcher.forward(request, response);
         } else if (request.getParameter("txtDisablePassword") != null) {
             desativaUsuario(request, usuarioDAO);

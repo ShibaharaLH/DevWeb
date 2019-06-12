@@ -2,57 +2,92 @@
 
 <html>
     <head>
-        <script type="text/javascript">
-            function validarPassword() {
-                if (document.formActiveUserByEmail.txtPasswordActive.value == "") {
-                    alert("Campo senha não Informado");
-                    return false;
-                }
-                if (document.formActiveUserByEmail.txtConfirmPasswordActive.value == "") {
-                    alert("Campo confirmar senha não Informado");
-                    return false;
-                }
-                if (document.formActiveUserByEmail.txtPasswordActive.value != document.formActiveUserByEmail.txtConfirmPasswordActive.value) {
-                    alert("Senha e confirmar senha com valores diferentes");
-                    return false;
-                }
-
-                document.formActiveUserByEmail.submit();
-            }
-        </script>
-        <title> Active User </title>
-
-        <style type="text/css">
-            *{font-family: 'Montserrat', cursive;}
-            form{text-align: center; margin-top: 10px;}
-            input[type="email"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-            input[type="password"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-            input[type="button"]{border: 10px solid #CCC; margin-top: 50px;}
-            input[type="submit"]{border: none; width: 80px; height: 25px; margin-top: 20px; border-radius: 3px; margin-right: 10px; margin-left: 10px;}
-            input[type="submit"]:hover{background-color: #1E90FF; color: #FFF; cursor: pointer;}
-            h1{text-align: center; margin-top: 115px;}
-            button{background-color: #D8D8BF; margin-left: 1230px; margin-top: 10px;}
-            button:hover{background-color: #1E90FF; color: #FFF; cursor: pointer;}
-            body{
-                background-image: url(.jpg);
-                background-attachment: fixed;
-                background-size: 100%;
-                background-repeat: no-repeat;
-                background-color: #000;
-            }    
-        </style>
+        <title> Ativar Usuário </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--===============================================================================================-->
 
     </head>
-
     <body>
 
-        <h1> Active User </h1>
+        <div class="limiter">
+            <div class="container-login100" >
+                <div class="wrap-login100">
+                    <form class="login100-form" name="formActiveUserByEmail" action="Usuario" method="post">
+                        <span class="login100-form-logo">
+                            <i class="zmdi zmdi-landscape"></i>
+                        </span>
 
-        <form name="formActiveUserByEmail" action="Usuario" method="post">
-            <input type="password" placeholder=" Password" name="txtPasswordActive"><br />
-            <input type="password" placeholder=" Confirm Password" name="txtConfirmPasswordActive"><br />
-            <input type="button" value="Ativar usuario" name="activeUser" onclick="validarPassword()"/><br/>
-        </form>
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Ativar usuário
+                        </span>
+
+                        <div class="wrap-input100" data-validate="Enter password">
+                            <input class="input100" type="password" name="txtPasswordActive" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div class="wrap-input100" data-validate="Confirm password">
+                            <input class="input100" type="password" name="txtConfirmPasswordActive" placeholder="Confirmar senha">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                         <div class="container-login100-form-btn">
+                            <input type="button" value="Ativar usuário" name="activeUser" class="login100-form-btn" style="background: white" onclick="validarPasswordAtivarUsuario()">
+                        </div>
+                        
+                        <div class="text-center p-t-70">
+                            <a class="txt1" href="Login.jsp">
+                                Voltar para área de acesso
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+        <!--===============================================================================================-->
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
+        <script src="js/validarForm.js"></script>
 
     </body>
 </html>

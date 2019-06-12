@@ -1,77 +1,82 @@
-<!DOCTYPE html>
-
 <html>
     <head>
-        <script type="text/javascript">
-            function validarFormUsuario() {
-                if (document.formCadastrarUsuario.txtUserName.value == "") {
-                    alert("Campo userName não Informado");
-                    return false;
-                }
-                if (document.formCadastrarUsuario.txtEmail.value == "") {
-                    alert("Campo email não Informado");
-                    return false;
-                }
-                if (document.formCadastrarUsuario.txtPassword.value == "") {
-                    alert("Campo senha não Informado");
-                    return false;
-                }
-                if (document.formCadastrarUsuario.txtConfirmPassword.value == "") {
-                    alert("Campo confirmar senha não Informado");
-                    return false;
-                }
-                if(document.formCadastrarUsuario.txtPassword.value != document.formCadastrarUsuario.txtConfirmPassword.value){
-                    alert("Senha e confirmar senha com valores diferentes");
-                    return false;
-                }
+        <title>Cadastrar Usuário</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
 
-                document.formCadastrarUsuario.submit();
-            }
-        </script>
-        <title> Criar conta - Twitter Simulator </title>
-        <style type="text/css">
-        *{font-family: 'Montserrat', cursive;}
-        form{text-align: center; margin-top: 20px;}
-        input[type="text"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-        input[type="email"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-        input[type="password"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-        input[type="submit"]{border: none; width: 80px; height: 25px; margin-top: 20px; border-radius: 3px; margin-right: 10px; margin-left: 10px;}
-        input[type="submit"]:hover{background-color: #1E90FF; color: #FFF; cursor: pointer;}
-        h1{color: #FFF; text-align: center; margin-top: 180px;}
-        body{
-            background-image: url(create.jpeg);
-            background-attachment: fixed;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-color: #000;
-        } 
-        </style>
-        
     </head>
-    <body>
+    <body style="background-color: black">
 
-        <h1> Create Account </h1>
-        
-        <form name="formCadastrarUsuario" action="Usuario" method="post">
-            
-            <input type="text" placeholder=" Name" name="txtUserName"><br />
-            <input type="email" placeholder=" Email" name="txtEmail"><br />
-            <input type="password" placeholder=" Password" name="txtPassword"><br />
-            <input type="password" placeholder=" Confirm Password" name="txtConfirmPassword"><br />
-            <input type="button" value="Create" name="Criar" onclick="validarFormUsuario()">
-            <input type="button" value="Sign in" name="Entrar" />
-            
-        </form>
-        
-        <%
-            
-            if(request.getParameter("Entrar") != null){
-                response.sendRedirect("PaginaLogin.jsp");
-            }else if(request.getParameter("Criar") != null){
-                
-                response.sendRedirect("CreateUser.jsp");
-            }
-            
-        %>
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <form class="login100-form" name="formCadastrarUsuario" action="Usuario" method="post">
+                        <span class="login100-form-logo">
+                            <i class="zmdi zmdi-landscape"></i>
+                        </span>
+
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Cadastrar Usuário
+                        </span>
+
+                        <div class="wrap-input100" data-validate = "Enter username">
+                            <input class="input100" type="text" name="txtUserName" placeholder="Username">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100" data-validate = "Enter email">
+                            <input class="input100" type="text" name="txtEmail" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100" data-validate="Enter password">
+                            <input class="input100" type="password" name="txtPassword" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div class="wrap-input100" data-validate="Confirm password">
+                            <input class="input100" type="password" name="txtConfirmPassword" placeholder="Confirmar senha">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <input type="button" value="Create" name="Criar" class="login100-form-btn" style="background: white" onclick="validarFormUsuario()">
+                        </div>
+                        <div class="text-center p-t-70">
+                            <a class="txt1" href="Login.jsp">
+                                Voltar para área de acesso
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+            <!--<script src="js/main.js"></script>-->
+            <script src="js/validarForm.js"></script>
+        </footer>
     </body>
 </html>

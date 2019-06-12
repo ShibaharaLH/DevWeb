@@ -2,51 +2,87 @@
 
 <html>
     <head>
-        <script type="text/javascript">
-            function validarEmail() {
-                if (document.formEmailActiveUser.txtEmailActiveUser.value == "") {
-                    alert("Campo email não Informado");
-                    return false;
-                }
-
-                document.formEmailActiveUser.submit();
-            }
-        </script>
-        <title> Active Account - Twitter Simulator </title>
-
-        <style type="text/css">
-            *{font-family: 'Montserrat', cursive;}
-            form{text-align: center; margin-top: 20px;}
-            input[type="text"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-            input[type="email"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-            input[type="password"]{border: 3px solid #CCC; width: 280px; height: 28px; pudding-left: 10px; margin-top: 10px; border-radius: 5px;}
-            input[type="submit"]{border: none; width: 80px; height: 25px; margin-top: 20px; border-radius: 3px; margin-right: 10px; margin-left: 10px;}
-            input[type="submit"]:hover{background-color: #1E90FF; color: #FFF; cursor: pointer;}
-            h1{color: #FF0000; text-align: center; margin-top: 135px;}
-            button{border: none; width: 80px; height: 25px; margin-top: 10px; border-radius: 3px; margin-right: 1230px; margin-left: 10px;}
-            button:hover{background-color: #1E90FF; color: #FFF; cursor: pointer;}
-            body{
-                background-image: url(active.jpeg);
-                background-attachment: fixed;
-                background-size: 100%;
-                background-repeat: no-repeat;
-                background-color: #000;
-            } 
-        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--===============================================================================================-->
 
     </head>
     <body>
 
-        <form method="post">
-            <button class="btn btn-primary btn-sm" name="Home"> Home </button>
-        </form>
+        <div class="limiter">
+            <div class="container-login100" >
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" name="formEmailActiveUser" action="Usuario" method="get">
+                        <span class="login100-form-logo">
+                            <i class="zmdi zmdi-landscape"></i>
+                        </span>
 
-        <h1> Active Account </h1>
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Ativar usuário
+                        </span>
 
-        <form name="formEmailActiveUser" action="Usuario" method="get">
-            <input type="email" placeholder=" email" name="txtEmailActiveUser"><br />
-            <input type="button" value="Enviar email para ativar usuário" name="emailActiveUser" onclick="validarEmail()"/><br/>
-        </form>
+                        <div class="wrap-input100 validate-input" data-validate = "Enter email">
+                            <input class="input100" type="text" name="txtEmailActiveUser" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+                             Enviar email de ativação
+                             </button>
+                        </div>
+                        
+                        <div class="text-center p-t-70">
+                            <a class="txt1" href="Login.jsp">
+                                Voltar para área de acesso
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+        <!--===============================================================================================-->
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
 
     </body>
 </html>

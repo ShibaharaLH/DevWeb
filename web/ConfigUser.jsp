@@ -75,6 +75,9 @@
                             <a class="txt1" href="DesativaUser.jsp">
                                 Desativar usuario
                             </a><br>
+                            <a class="txt1" href="Home.jsp">
+                                Voltar para Home
+                            </a><br>
                         </div>
                     </form>
                 </div>

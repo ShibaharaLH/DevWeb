@@ -5,6 +5,7 @@
  */
 package br.com.prototipoRedeSocial.DAO;
 
+import br.com.prototipoRedeSocial.DTO.UsuarioDTO;
 import br.com.prototipoRedeSocial.models.Post;
 import br.com.prototipoRedeSocial.models.PostComment;
 import java.sql.Connection;
@@ -47,12 +48,12 @@ public class PublicacaoDAO {
         return toReturn;
     }
     
-    public List<PostComment> getPostComment(Post post) throws SQLException{
+    public List<PostComment> getPostComment(int idPost) throws SQLException{
         List<PostComment> toReturn = new ArrayList<PostComment>();
         String sql = "select * from PostComment where idPost = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, post.getIdPost());
+            stmt.setInt(1, idPost);
             
             ResultSet result = stmt.executeQuery();
             while (result.next() == true) {
@@ -95,24 +96,20 @@ public class PublicacaoDAO {
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
-        } finally {
-            connection.close();
         }
     }
     
-    public void excluirPost(Post post) throws SQLException{
+    public void excluirPost(int idPost) throws SQLException{
         String sql = "delete from Post where idPost = ?;";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             
-            stmt.setInt(1, post.getIdPost());
+            stmt.setInt(1, idPost);
 
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.close();
         }
     }
     
@@ -129,8 +126,6 @@ public class PublicacaoDAO {
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.close();
         }
     }
     
@@ -146,24 +141,50 @@ public class PublicacaoDAO {
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.close();
         }
     }
     
-    public void excluirPostComment(PostComment comment) throws SQLException{
+    public void excluirPostComment(int idPostComment) throws SQLException{
         String sql = "delete from PostComment where idPostComment = ?;";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             
-            stmt.setInt(1, comment.getIdPostComment());
+            stmt.setInt(1, idPostComment);
 
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.close();
+        }
+    }
+    
+    public void alterarPostEmail(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update Post set email = ? where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getNewEmail());
+            stmt.setString(2, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void alterarPostCommentEmail(UsuarioDTO usuarioRequest) throws SQLException{
+        String sql = "update PostComment set email = ? where email = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, usuarioRequest.getNewEmail());
+            stmt.setString(2, usuarioRequest.getEmail());
+
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     

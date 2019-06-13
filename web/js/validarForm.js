@@ -99,6 +99,7 @@ function validarUserNameAlterarUsuario() {
 
     document.formUserName.submit();
 }
+
 function validarPasswordAlterarUsuario() {
     if (document.formPassword.txtChangePassword.value == "") {
         alert("Campo senha não Informado");
@@ -115,6 +116,24 @@ function validarPasswordAlterarUsuario() {
 
     document.formPassword.submit();
 }
+
+function validarPasswordConfirmaTrocaEmail() {
+    if (document.formConfirmaTrocaEmail.txtSenhaTrocaEmail.value == "") {
+        alert("Campo senha não Informado");
+        return false;
+    }
+    if (document.formConfirmaTrocaEmail.txtConfirmaSenhaTrocaEmail.value == "") {
+        alert("Campo confirmar senha não Informado");
+        return false;
+    }
+    if (document.formConfirmaTrocaEmail.txtSenhaTrocaEmail.value != document.formConfirmaTrocaEmail.txtConfirmaSenhaTrocaEmail.value) {
+        alert("Senha e confirmar senha com valores diferentes");
+        return false;
+    }
+
+    document.formConfirmaTrocaEmail.submit();
+}
+
 function validarEmailAlterarUsuario() {
     if (document.formEmail.txtChangeEmail.value == "") {
         alert("Campo email não Informado");

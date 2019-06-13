@@ -13,13 +13,13 @@ public class PostComment {
     
     private int idPostComment;
     private int idPost;
-    private String CommentValue;
+    private String commentValue;
     private String email;
 
-    public PostComment(int idPostComment, int idPost, String CommentValue, String email) {
+    public PostComment(int idPostComment, int idPost, String commentValue, String email) {
         this.idPostComment = idPostComment;
         this.idPost = idPost;
-        this.CommentValue = CommentValue;
+        this.commentValue = commentValue;
         this.email = email;
     }
 
@@ -40,11 +40,11 @@ public class PostComment {
     }
 
     public String getCommentValue() {
-        return CommentValue;
+        return commentValue;
     }
 
-    public void setCommentValue(String CommentValue) {
-        this.CommentValue = CommentValue;
+    public void setCommentValue(String commentValue) {
+        this.commentValue = commentValue;
     }
 
     public String getEmail() {

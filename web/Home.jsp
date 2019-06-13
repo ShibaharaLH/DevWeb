@@ -31,7 +31,7 @@
                 </textarea>
                 <input type="button" value="Postar" onclick="validaTextArea()"/>
             </form>
-            
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -51,6 +51,18 @@
                                     <input type="hidden" name="hiddenPostEmail" value="${p.email}">
                                     <input type="hidden" name="hiddenPostValue" value="${p.postValue}">
                                     <input type="submit" value="Ver detalhes"/>
+                                </form>
+                                <form name="formAlterarPost" action="Post" method="post">
+                                    <input type="hidden" name="hiddenPostIDAlterar" value="${p.idPost}">
+                                    <input type="hidden" name="hiddenPostEmailAlterar" value="${p.email}">
+                                    <input type="hidden" name="hiddenPostValueAlterar" value="${p.postValue}">
+                                    <input type="submit" value="Alterar Post"/>
+                                </form>
+                                <form name="formExcluirPost" action="Post" method="post">
+                                    <input type="hidden" name="hiddenPostIDExcluir" value="${p.idPost}">
+                                    <input type="hidden" name="hiddenPostEmailExcluir" value="${p.email}">
+                                    <input type="hidden" name="hiddenPostValueExcluir" value="${p.postValue}">
+                                    <input type="submit" value="Excluir Post"/>
                                 </form>
                             </td>
                         </tr>

@@ -87,6 +87,10 @@ public class UsuarioController extends HttpServlet {
                 alterarEmailUsuario(request, usuarioDAO, publicacaoDAO, usuarioRequest);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("ConfigUser.jsp");
                 requestDispatcher.forward(request, response);
+            }else if(request.getParameter("hiddenLogout") != null){
+                session.invalidate();
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
     }

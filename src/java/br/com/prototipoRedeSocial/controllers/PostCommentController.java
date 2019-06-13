@@ -7,10 +7,8 @@ package br.com.prototipoRedeSocial.controllers;
 
 import br.com.prototipoRedeSocial.DAO.PublicacaoDAO;
 import br.com.prototipoRedeSocial.connector.ConnectorDataBase;
-import br.com.prototipoRedeSocial.models.Post;
 import br.com.prototipoRedeSocial.models.PostComment;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;

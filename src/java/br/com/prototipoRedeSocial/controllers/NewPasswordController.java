@@ -59,7 +59,7 @@ public class NewPasswordController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("emailResetPassword", email);
         String subject = "Email para resetar senha";
-        String message = "Para resetar sua senha entre no seguinte link: http://localhost:8080/PrototipoRedeSocial/newPassword.jsp";
+        String message = "Para resetar sua senha entre no seguinte link: http://localhost:8080/PrototipoRedeSocial/NewPassword.jsp";
 
         PlainTextEmailSender mailer = new PlainTextEmailSender();
 
@@ -80,6 +80,8 @@ public class NewPasswordController extends HttpServlet {
         UsuarioDTO usuarioRequest = new UsuarioDTO("", email, "", newPassword);
         UsuarioDAO usuarioDAO = new UsuarioDAO(ConnectorDataBase.getConexao());
         usuarioDAO.alterarPassword(usuarioRequest);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+        requestDispatcher.forward(request, response);
     }
 
 }

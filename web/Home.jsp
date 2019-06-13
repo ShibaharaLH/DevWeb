@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Home
-    Created on : 10/06/2019, 13:00:44
-    Author     : kono
---%>
 <%@page import="br.com.prototipoRedeSocial.models.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,12 +19,39 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" color="info" href="#">Seja Bem vindo!</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <form name="formConfigUser" action="ConfigUser.jsp" method="get">
+                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit" href="ConfigUser.jsp">Configuração</button>
+                    </form>
+                </ul>
+
+                <form name="formLogin" action="Usuario" method="post">
+                    <input type="hidden" name="hiddenLogout" value="logout">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Logout</button>
+                </form>
+            </div>
+        </nav>
+
+
         <div class="container">
             <form name="formNewPost" action="Post" method="post">
-                Digite um novo post: <textarea name="txtAreaPost" rows="1" cols="40">
-                </textarea>
-                <input type="button" value="Postar" onclick="validaTextArea()"/>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Digite um novo post:</span>
+                    </div>
+                    <textarea name="txtAreaPost" class="form-control" aria-label="With textarea"></textarea>
+
+                    <input type="button" value="Postar" class="btn btn-info my-2 my-sm-0" onclick="validaTextArea()"/>
+                </div>
             </form>
 
             <table class="table table-striped">
@@ -40,6 +62,7 @@
                         <th scope="col"> </th>
                     </tr>
                 </thead>
+                <br/>
                 <tbody>
                     <c:forEach var="p" items="${postList}">
                         <tr>
@@ -50,19 +73,19 @@
                                     <input type="hidden" name="hiddenPostID" value="${p.idPost}">
                                     <input type="hidden" name="hiddenPostEmail" value="${p.email}">
                                     <input type="hidden" name="hiddenPostValue" value="${p.postValue}">
-                                    <input type="submit" value="Ver detalhes"/>
-                                </form>
+                                    <input class="btn btn-info my-2 my-sm-0" type="submit" value="Ver detalhes"/>
+                                </form><br>
                                 <form name="formAlterarPost" action="Post" method="post">
                                     <input type="hidden" name="hiddenPostIDAlterar" value="${p.idPost}">
                                     <input type="hidden" name="hiddenPostEmailAlterar" value="${p.email}">
                                     <input type="hidden" name="hiddenPostValueAlterar" value="${p.postValue}">
-                                    <input type="submit" value="Alterar Post"/>
-                                </form>
+                                    <input class="btn btn-info my-2 my-sm-0" type="submit" value="Alterar Post"/>
+                                </form><br>
                                 <form name="formExcluirPost" action="Post" method="post">
                                     <input type="hidden" name="hiddenPostIDExcluir" value="${p.idPost}">
                                     <input type="hidden" name="hiddenPostEmailExcluir" value="${p.email}">
                                     <input type="hidden" name="hiddenPostValueExcluir" value="${p.postValue}">
-                                    <input type="submit" value="Excluir Post"/>
+                                    <input class="btn btn-info my-2 my-sm-0" type="submit" value="Excluir Post"/>
                                 </form>
                             </td>
                         </tr>

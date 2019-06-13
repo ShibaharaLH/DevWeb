@@ -29,7 +29,7 @@ public class PublicacaoDAO {
     
     public List<Post> getPosts() throws SQLException{
         List<Post> toReturn = new ArrayList<Post>();
-        String sql = "select * from Post";
+        String sql = "select * from Post order by idPost Desc limit 10";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             

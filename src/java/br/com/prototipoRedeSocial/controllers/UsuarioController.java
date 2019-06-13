@@ -5,7 +5,6 @@ import br.com.prototipoRedeSocial.DAO.UsuarioDAO;
 import br.com.prototipoRedeSocial.DTO.UsuarioDTO;
 import br.com.prototipoRedeSocial.connector.ConnectorDataBase;
 import br.com.prototipoRedeSocial.models.Post;
-import br.com.prototipoRedeSocial.models.PostComment;
 import br.com.prototipoRedeSocial.service.PlainTextEmailSender;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,8 +52,19 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession session = request.getSession();
         if (session.getAttribute("emailUsuarioAutenticado") == null) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
-            requestDispatcher.forward(request, response);
+            if (request.getParameter("txtUserName") != null && request.getParameter("txtEmail") != null
+                    && request.getParameter("txtPassword") != null) {
+                cadastrarUsuario(request, usuarioDAO);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
+            } else if (request.getParameter("txtPasswordActive") != null) {
+                ativaUsuario(request, usuarioDAO);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
+            } else {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
+            }
         } else {
             if (request.getParameter("txtChangeUserName") != null || request.getParameter("txtChangePassword") != null
                     || request.getParameter("txtChangeEmail") != null) {
@@ -69,41 +79,27 @@ public class UsuarioController extends HttpServlet {
                 excluiUsuario(request, usuarioDAO);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
                 requestDispatcher.forward(request, response);
-            } else if (request.getParameter("txtUserName") != null && request.getParameter("txtEmail") != null
-                    && request.getParameter("txtPassword") != null) {
-                cadastrarUsuario(request, usuarioDAO);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
-                requestDispatcher.forward(request, response);
-            } else if (request.getParameter("txtPasswordActive") != null) {
-                ativaUsuario(request, usuarioDAO);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
-                requestDispatcher.forward(request, response);
             } else if (request.getParameter("txtSenhaTrocaEmail") != null) {
                 PublicacaoDAO publicacaoDAO = new PublicacaoDAO(ConnectorDataBase.getConexao());
-
                 String email = session.getAttribute("emailUsuarioAutenticado").toString();
                 String newEmailUser = session.getAttribute("newEmailUser").toString();
                 UsuarioDTO usuarioRequest = new UsuarioDTO("", email, newEmailUser, "");
                 alterarEmailUsuario(request, usuarioDAO, publicacaoDAO, usuarioRequest);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("ConfigUser.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
     }
 
     protected void proccessGetRequest(HttpServletRequest request, HttpServletResponse response, UsuarioDAO usuarioDAO) throws ServletException, IOException, SQLException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("emailUsuarioAutenticado") == null) {
+        String email = request.getParameter("txtEmailActiveUser");
+        UsuarioDTO usuarioRequest = new UsuarioDTO("", email, "", "");
+        if (usuarioDAO.verificaUsuarioAtivo(usuarioRequest)) {
+            throw new ServletException("Usuario já ativo");
+        } else {
+            enviaEmailAtivarUsuario(request, email);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request, response);
-        } else {
-            String email = request.getParameter("txtEmailActiveUser");
-            UsuarioDTO usuarioRequest = new UsuarioDTO("", email, "", "");
-            if (usuarioDAO.verificaUsuarioAtivo(usuarioRequest)) {
-                throw new ServletException("Usuario já ativo");
-            } else {
-                enviaEmailAtivarUsuario(request, email);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
-                requestDispatcher.forward(request, response);
-            }
         }
     }
 
@@ -112,7 +108,7 @@ public class UsuarioController extends HttpServlet {
         String email = request.getParameter("txtEmail");
         String password = request.getParameter("txtPassword");
         UsuarioDTO usuarioRequest = new UsuarioDTO(userName, email, null, password);
-        if (usuarioDAO.verificaEmailCadastrado(usuarioRequest) == false) {
+        if (usuarioDAO.verificaEmailCadastrado(email) == false) {
             if (usuarioDAO.verificaUserNameCadastrado(usuarioRequest) == false) {
                 usuarioDAO.cadastrarUsuario(usuarioRequest);
                 enviaEmailAtivarUsuario(request, email);
@@ -157,7 +153,6 @@ public class UsuarioController extends HttpServlet {
     }
 
     private void alteraUsuario(HttpServletRequest request, UsuarioDAO usuarioDAO) throws ServletException, SQLException {
-        PublicacaoDAO publicacaoDAO = new PublicacaoDAO(ConnectorDataBase.getConexao());
         String newUserName = request.getParameter("txtChangeUserName");
         String newEmail = request.getParameter("txtChangeEmail");
         String newPassword = request.getParameter("txtChangePassword");
@@ -165,11 +160,15 @@ public class UsuarioController extends HttpServlet {
         String email = session.getAttribute("emailUsuarioAutenticado").toString();
         UsuarioDTO usuarioRequest = new UsuarioDTO(newUserName, email, newEmail, newPassword);
         if (newUserName != null) {
-            usuarioDAO.alterarUserName(usuarioRequest);
-            session.setAttribute("userNameUsuarioAutenticado", newUserName);
+            if (!usuarioDAO.verificaUserNameCadastrado(usuarioRequest)) {
+                usuarioDAO.alterarUserName(usuarioRequest);
+                session.setAttribute("userNameUsuarioAutenticado", newUserName);
+            }
         } else if (newEmail != null) {
-            session.setAttribute("newEmailUser", newEmail);
-            enviaEmailConfirmaTrocaEmail(request, email);
+            if (!usuarioDAO.verificaEmailCadastrado(newEmail)) {
+                session.setAttribute("newEmailUser", newEmail);
+                enviaEmailConfirmaTrocaEmail(request, email);
+            }
         } else if (newPassword != null) {
             usuarioDAO.alterarPassword(usuarioRequest);
         }

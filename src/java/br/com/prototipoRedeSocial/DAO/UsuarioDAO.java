@@ -76,13 +76,13 @@ public class UsuarioDAO {
         return toReturn;
     }
     
-    public boolean verificaEmailCadastrado(UsuarioDTO usuarioRequest) throws SQLException{
+    public boolean verificaEmailCadastrado(String email) throws SQLException{
         boolean toReturn = false;
         String sql = "select * from Usuario where email = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setString(1, usuarioRequest.getEmail());
+            stmt.setString(1, email);
 
             ResultSet result = stmt.executeQuery();
             if (result.next() == true) {
